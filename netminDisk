@@ -1,0 +1,70 @@
+#!/bin/bash
+clear
+tput cup 10 20
+echo '-----------------------------------'
+tput cup 11 20
+echo '|  1. View Disk Usage             |'
+tput cup 12 20
+echo '|  2. Create Partition            |'
+tput cup 13 20
+echo '|  3. Delete Partition            |'
+tput cup 14 20
+echo '|  4. Mount Partition             |'
+tput cup 15 20
+echo '|  5. Unmount Partition           |'
+tput cup 16 20
+echo '|  6. Main Menu                   |'
+tput cup 17 20
+echo '-----------------------------------'
+tput cup 18 20
+echo -n 'Enter Choice : '
+read opt
+case $opt in
+
+1)	clear
+	tput cup 10 0
+	df -l
+	read ;;
+
+2)	clear
+	echo -n "Drive Name : "
+	read drive
+	fdisk $drive
+	read ;;
+
+3)	clear
+	echo -n "Drice Name : "
+	read drive
+	fdisk $drive
+	read;;
+
+4)	clear
+	tput cup 10 20
+	echo -n "Device name to mount : "
+	read device
+	tput cup 11 20
+	echo -n "Directory to mount on : "
+	read dir
+	mount $device $dir
+	read;;
+
+5)	clear
+	tput cup 10 20
+	echo -n "Directory to unmount : "
+	read dir
+	tput cup 11 20
+	umount dir 
+	read;;
+
+6)	clear
+	tput cup 10 20
+	echo "Press Enter to return to main menu..."
+	read;;
+
+*)	clear
+	tput cup 10 20
+	echo "Invalid Choice!"
+	tput cup 12 20
+	echo "Press Enter to return to main menu..."
+	read ;;
+esac

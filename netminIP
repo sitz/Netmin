@@ -1,0 +1,74 @@
+#!/bin/bash
+clear
+tput cup 10 20
+echo '-----------------------------------'
+tput cup 11 20
+echo '|  1. View Existing Interfaces    |'
+tput cup 12 20
+echo '|  2. Activate Interface          |'
+tput cup 13 20
+echo '|  3. De-Activate Interface       |'
+tput cup 14 20
+echo '-----------------------------------'
+tput cup 15 20
+echo -n 'Enter Choice : '
+read opt
+case $opt in
+
+1)	clear
+	ifconfig -a
+	read ;;
+
+2)	clear
+	tput cup 10 20
+	echo -n "Enter Interface name : "
+	read eth
+	ifconfig | grep $eth >> /dev/null
+	if [ $? -eq 0 ]
+	then
+		tput cup 11 20
+		echo "Interface $eth already active!"
+	else
+		tput cup 11 20
+		echo -n "Enter Netmask : "
+		read mask
+		tput cup 12 20
+		echo -n "Enter IP Address : "
+		read ip
+		tput cup 13 20
+		echo "Enabling $eth..."
+		ifconfig $eth $ip netmask $mask up
+		tput cup 14 20
+		echo "Interface $eth now active."
+	fi
+	tput cup 16 20
+	echo "Press enter to return to main menu..."
+	read ;;
+
+3)	clear
+	tput cup 10 20
+	echo -n "Enter Interface name : "
+	read eth
+	ifconfig | grep $eth >> /dev/null
+	if [ $?  -ne 0 ]
+	then
+		tput cup 11 20
+		echo "Interface $eth is already inactive."
+	else
+		tput cup 11 20
+		ehco "Disabling $eth..."
+		ifconfig $eth down
+		tput cup 12 20
+		echo "Interface $eth is now inactive."
+	fi
+	tput cup 15 20
+	echo "Press enter to retuen to main menu..."
+	read ;;
+
+*)	clear
+	tput cup 10 20
+	echo "Invalid Choice!"
+	tput cup 20 20
+	echo "Press Enter to return to main menu..."
+	read ;;
+esac

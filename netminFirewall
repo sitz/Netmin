@@ -1,0 +1,75 @@
+#!/bin/bash
+clear
+tput cup 10 20
+echo '-----------------------------------'
+tput cup 11 20
+echo '|  1. View Firewall Rules         |'
+tput cup 12 20
+echo '|  2. Flush Firewall Rules        |'
+tput cup 13 20 
+echo '|  3. Accept Network              |'
+tput cup 14 20
+echo '|  4. Reject Network              |'
+tput cup 15 20
+echo '|  5. Main Menu                   |'
+tput cup 16 20
+echo '-----------------------------------'
+tput cup 17 20
+echo -n 'Enter Choice : '
+read opt
+case $opt in
+
+1)	clear
+	tput cup 5 0
+	iptables -L
+	tput cup 20 0
+	echo 'Press Enter to return...'
+	read ;;
+
+2)	clear
+	iptables -F
+	service iptables save
+	service iptables restart
+	tput cup 10 20
+	echo 'Press Enter to return...' 
+	read ;;
+
+3)	clear
+	tput cup 10 10
+	echo -n "Enter Network Address ( CIDR Format / Single IP ) : "
+	read ip
+	tput cup 11 10
+	echo -n "Enter Protocol ( Eg. tcp ) : "
+	read protocol
+	tput cup 12 10
+	echo -n "Enter Service ( Eg. telnet / 23 ) : "
+	read service
+	tput cup 13 10
+	iptables -A INPUT -s $ip -p $protocol --dport $service -j ACCEPT
+	tput cup 20 10
+	echo "Press Enter to return..."
+	read;;
+
+4)	clear
+	tput cup 10 20
+	echo -n "Enter Network Address ( CIDR Format / Single IP ) : "
+        read ip
+        tput cup 11 10
+        echo -n "Enter Protocol ( Eg. tcp ) : "
+        read protocol
+        tput cup 12 10
+        echo -n "Enter Service ( Eg. telnet / 23 ) : "
+        read service
+        tput cup 13 10
+        iptables -A INPUT -s $ip -p $protocol --dport $service -j REJECT
+        tput cup 20 10
+	echo "Press Enter to return..."
+	read;;
+
+*)	clear
+	tput cup 10 20
+	echo "Invalid Choice!"
+	tput cup 12 20
+	echo "Press Enter to return to main menu..."
+	read ;;
+esac

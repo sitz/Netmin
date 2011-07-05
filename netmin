@@ -1,0 +1,85 @@
+#!/bin/bash
+clear
+echo "You are logged in as a root :)"
+while [ true ]
+do
+clear
+echo
+tput cup 1 20
+echo '-----------------------------------------------------'
+tput cup 2 20
+echo '|   1. User Adminstration                           |'
+tput cup 3 20
+echo '|   2. Configure IP                                 |'
+tput cup 4 20
+echo '|   3. Active Processes                             |'
+tput cup 5 20
+echo '|   4. Disk Management                              |'
+tput cup 6 20
+echo '|   5. Firewall Management                          |'
+tput cup 7 20
+echo '|   6. Name Server Query                            |'
+tput cup 8 20
+echo '|   7. Create DNS Record                            |'
+tput cup 9 20
+echo '|   8. Delete DNS Rocord                            |'
+tput cup 10 20
+echo '|   9. NFS Import                                   |'
+tput cup 11 20
+echo '|  10. Undo NFS import                              |'
+tput cup 12 20
+echo '|  11. Samba Sharing                                |'
+tput cup 13 20
+echo '|  12. Undo Samba sharing                           |'
+tput cup 14 20
+echo '|  13. NFS Export                                   |'
+tput cup 15 20
+echo '|  14. Undo NFS Export                              |'
+tput cup 16 20
+echo '| Q|q. Quit                                         |'
+tput cup 17 20
+echo '-----------------------------------------------------'
+tput cup 20 20
+echo -n 'Enter Choice : '
+read  choice
+case $choice in
+
+1)	./netminUser ;;
+
+2)	./netminIP ;;
+
+3)	ps aux | more ;;
+
+4)	./netminDisk ;;
+
+5)	./netminFirewall ;;
+
+6)      ./netminNSlookup ;;
+
+7)	./netminDNSCreate ;;
+
+8)	./netminDNSDelete ;;
+
+9)	./netminNFSImport ;;
+
+10)     ./netminNFSImportUndo ;;
+
+11)	./netminSamba ;;
+
+12) 	./netminSambadel ;;
+
+15)	./netminNFSExport ;;
+
+16)	./netminNFSExportUndo ;;
+
+Q)	clear 
+	exit ;;
+
+q)	clear
+	exit ;;
+
+*)	echo "IMPROPER CHOICE"
+	echo "Press Enter to continue"
+	read id ;;
+esac
+done

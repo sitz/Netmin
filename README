@@ -1,0 +1,32 @@
+Netmin is a shell based tool which can be used by Network/System Administrators for all sorts of system administration tasks and in network design/management based on UNIX platform. Netmin could be used by any person with simple knowledge of operating computers and running applications to perform the herculean task of managing the UNIX based system.
+
+
+Netmin can be used for performing following tasks:
+
+1. System Administration: Boot up/Shutdown, Cron jobs scheduling, Disk quota management, User & Group management, Active process scheduling, File system backup and Customized system documentation.
+2. Server Administration: Apache Webserver, BIND DNS Server, DHCP Server, Dovecot IMAP/POP3 Server, Samba Windows File Sharing, Sendmail Configuration and VSFTPD Servers.
+3. Network Configuration: Virtual Routers/Gateways/NICs/Hosts configuration, NFS Import/Export, Linux Firewall Management and IP configuration.
+4. Hardware Management: Disk Partition/Quota Management, GRUB Configuration.
+5. Cluster Jobs
+
+Primary goal of this Project can span from giving a kick start to any naive user having brief idea about the system to advanced users, who don’t have much time for turning up the MAN pages and typing the whole code for configuring their system or server.
+
+Unlike other GUI tools, Netmin has a little requirement to start using it. Its bare requirements are already provided as a built-in primary feature of the OS being used. Hence, it can turn out to be handy just after any system crash or system restore.
+
+
+Requirements:
+
+1. Operating System : Redhat Enterprise Linux 4.0 (Program was developed and tested on this Version Only)
+2. Shell Requirement: BASH / SH Shell.
+3. Root access to the server.
+
+
+Instructions:
+
+1. Download the .tar/.gz file; copy the same in server’s / location.
+2. Use the command gzip -d Netmin.tar.gz to get a .tar file.
+3. Use the command tar xvf Netmin.tar to extract the files from the .tar file.
+4. Make sure you have minimum of 755 octal permissions for all the files in the Netmin folder, run ./start file in terminal to start the program. 
+(Either type chmod +x /Netmin/* or chmod 755 /Netmin/* in the terminal)
+5. Open with vim or any other editor to do the necessary addition, modification or deletion.
+6. For any clarification please email to siteshshrivastava@gmail.com with a note of clarification question.

@@ -1,0 +1,11 @@
+#!/bin/bash
+clear
+user='whoami'
+if [ $user -ne 'root' ]
+then
+	tput cup 10 20
+        echo "You need to log in as root to run this script !"
+else
+	./netmin
+fi
+

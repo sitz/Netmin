@@ -1,0 +1,117 @@
+#!/bin/bash
+clear
+tput cup 1 20
+echo '-----------------------------------------------------'
+tput cup 2 20
+echo '|   1. Users List					|'
+tput cup 3 20
+echo '|   2. Edit User					|'
+tput cup 4 20
+echo '|   3. Change Password				|'
+tput cup 5 20
+echo '|   4. Create User					|'
+tput cup 6 20
+echo '|   5. Delete User					|'
+tput cup 7 20
+echo  '-----------------------------------------------------'
+tput cup 8 20
+echo 
+tput cup 9 20
+echo -n 'Enter Choice : '
+read choice
+
+case $choice in
+
+1)	clear
+	cat /etc/passwd | more
+	sleep 3
+	clear
+	tput cup 10 20
+	echo 'Press Enter to return to Main menu . . .'
+	read ;; 
+
+2)	clear
+	tput cup 10 20
+	echo 'First press Esc, then type :wq to Exit !'
+	vim /etc/passwd 
+	tput cup 10 20
+	echo 'Press Enter to Return to Main menu . . .'
+	read ;;
+
+3)      clear
+        tput cup 10 20
+        echo -n 'Enter User Name : '
+        read name
+        tput cup 11 20
+        echo -n 'Enter New password for $name : '
+        stty -echo
+        read pass
+        stty sane
+        tput cup 12 20
+        echo $pass | passwd -S --stdin $name
+        tput cup 14 30
+        echo 'Press Enter to return Main menu . . .'
+        read ;;
+
+4)	clear
+	tput cup 10 20
+	echo -n 'Enter User Name : '
+	read user
+	if `grep $user /etc/passwd >> /dev/null`
+	then
+        	tput cup 11 20
+        	echo 'User already exists !'
+	else
+		tput cup 11 20
+		read -s -p "Enter Password : " pass
+                useradd -p $pass $user
+        	tput cup 12 20
+        	echo "$user was added successfully :) "
+	fi
+	tput cup 14 20
+	echo 'Press Enter to return to Main menu . . .'
+	read ;; 
+
+5)	clear
+	tput cup 10 20
+	echo -n 'Enter User Name : '
+	read name
+	if `grep $name /etc/passwd >> /dev/null`
+	then
+		tput cup 11 20
+		echo '---------------------------------------------'
+		tput cup 12 20
+		echo '|   1. With Home Directory			|'
+		tput cup 13 20
+		echo '|   2. Without Home Directory		|'
+		tput cup 14 20
+		echo '---------------------------------------------'
+		tput cup 15 20
+		echo -n 'Enter Choice : '
+		read opt
+		case $opt in
+		1)	userdel -r $name
+			tput cup 16 20
+			echo "User $name deleted with Home . . ." ;;
+
+		2)	userdel $name
+			tput cup 17 20
+			echo "User $name deleted without Home . . ." ;;
+		
+		*)	tput cup 18 20
+			echo 'Invalid Option !' ;;
+		esac
+	else
+		tput cup 11 20
+                echo "User $name don't exist !"
+	fi
+	tput cup 19 20
+	echo 'Press Enter to return to Main menu . . .'
+	read ;; 
+
+*)	tput cup 10 20
+	echo 'Invalid Choice !'
+	tput cup 11 20
+	echo "Press Enter to return to Main menu . . ."
+	read ;;
+esac
